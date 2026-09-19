@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HsCraft | Custom Photo Acrylic Wall Decor & Luxury Gifts</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fbf7ee',
+                            100: '#f6edd3',
+                            200: '#edd8a8',
+                            300: '#e3be75',
+                            400: '#d9a147',
+                            500: '#cd8727',
+                            600: '#b0671d',
+                            700: '#8c4c1a',
+                            800: '#733e1b',
+                            900: '#60341a',
+                            gold: '#D4AF37',
+                            dark: '#0B0F17',
+                            surface: '#131924',
+                            card: '#1C2536'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        luxury: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B0F17;
+            color: #F3F4F6;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(19, 25, 36, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card {
+            background: rgba(28, 37, 54, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #997819 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-btn {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA820A 100%);
+            color: #0B0F17;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .gold-btn:hover {
+            background: linear-gradient(135deg, #EAD063 0%, #C49714 100%);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2D3748;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Room Previews CSS simulation */
+        .room-bg-living {
+            background: linear-gradient(to bottom, rgba(11, 15, 23, 0.4), rgba(11, 15, 23, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+        }
+        .room-bg-bedroom {
+            background: linear-gradient(to bottom, rgba(11, 15, 23, 0.4), rgba(11, 15, 23, 0.7)), url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+        }
+        .room-bg-desk {
+            background: linear-gradient(to bottom, rgba(11, 15, 23, 0.4), rgba(11, 15, 23, 0.7)), url('https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+        }
+        .room-bg-gallery {
+            background: linear-gradient(to bottom, rgba(11, 15, 23, 0.4), rgba(11, 15, 23, 0.7)), url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+        }
+
+        /* Photo Filters */
+        .filter-original { filter: none; }
+        .filter-vivid { filter: saturate(1.6) contrast(1.15); }
+        .filter-bw { filter: grayscale(1) contrast(1.25); }
+        .filter-warm { filter: sepia(0.35) contrast(1.05) saturate(1.2); }
+        .filter-cool { filter: hue-rotate(15deg) saturate(1.1); }
+
+        /* Acrylic Effects */
+        .acrylic-glass-frame {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+                        inset 0 0 15px rgba(255, 255, 255, 0.35),
+                        0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .acrylic-glass-frame::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Metallic Studs */
+        .stud {
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #a0a0a0 50%, #4a4a4a 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.8);
+            position: absolute;
+            z-index: 20;
+        }
+
+        .led-glow {
+            box-shadow: 0 0 35px 12px rgba(212, 175, 55, 0.5), 0 0 60px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Custom Animations */
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-gold selection:text-black">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-brand-dark via-amber-950 to-brand-dark border-b border-brand-gold/20 py-2 text-xs font-medium text-amber-200 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="hidden md:flex items-center gap-4">
+                <span><i class="fa-solid fa-truck-fast text-brand-gold mr-1"></i> Express Pan-India Shipping</span>
+                <span><i class="fa-solid fa-shield-halved text-brand-gold mr-1"></i> 100% Damage-Free Guarantee</span>
+            </div>
+            <div class="w-full md:w-auto text-center overflow-hidden">
+                <div class="animate-ticker inline-flex items-center gap-8">
+                    <span>🔥 Festive Special: Get Flat 10% OFF with Code <strong class="text-white bg-brand-gold/20 px-2 py-0.5 rounded border border-brand-gold/40">HSCRAFT10</strong></span>
+                    <span>✨ High-Gloss Gallery Grade 3mm & 5mm Acrylic Frames</span>
+                    <span>📍 Direct Hub Dispatch from Jaipur & Bengaluru</span>
+                    <span>🎁 Free Gift Box Packaging on Orders Above ₹1,999</span>
+                </div>
+            </div>
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="#tracking" onclick="openTrackingModal()" class="hover:text-white transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-location-dot text-brand-gold"></i> Track Order
+                </a>
+                <span>|</span>
+                <a href="https://wa.me/919876543210" target="_blank" class="hover:text-green-400 transition-colors flex items-center gap-1">
+                    <i class="fa-brands fa-whatsapp text-green-500"></i> WhatsApp Support
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-300 hover:text-white text-xl p-2">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-gold to-amber-200 flex items-center justify-center text-brand-dark font-luxury font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                            Hs
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-luxury font-bold text-2xl tracking-wider text-white flex items-center gap-1">
+                                Hs<span class="gold-gradient-text">Craft</span>
+                            </span>
+                            <span class="text-[9px] uppercase tracking-widest text-amber-300/70 -mt-1 font-sans">Acrylic Studio & Gifts</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
+                    <div class="relative w-full">
+                        <input type="text" id="site-search-input" placeholder="Search acrylic frames, nameplates, photobooks..." 
+                               class="w-full bg-brand-surface/80 border border-white/10 rounded-full py-2.5 pl-11 pr-4 text-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:border-brand-gold/60 focus:ring-1 focus:ring-brand-gold/60 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                    </div>
+                    <!-- Live Search Popover -->
+                    <div id="search-results-popover" class="hidden absolute top-full left-0 right-0 mt-2 bg-brand-card border border-brand-gold/30 rounded-xl shadow-2xl p-3 z-50 max-h-80 overflow-y-auto">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Navigation Links & Actions -->
+                <div class="flex items-center gap-4 sm:gap-6">
+                    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-300">
+                        <a href="#customizer" class="hover:text-brand-gold transition-colors">3D Customizer</a>
+                        <a href="#catalog" class="hover:text-brand-gold transition-colors">Products</a>
+                        <a href="#wall-inspiration" class="hover:text-brand-gold transition-colors">Wall Ideas</a>
+                        <a href="#craftsmanship" class="hover:text-brand-gold transition-colors">Quality</a>
+                        <a href="#reviews" class="hover:text-brand-gold transition-colors">Reviews</a>
+                    </nav>
+
+                    <!-- Order Tracking Icon (Mobile/Tablet Quick Access) -->
+                    <button onclick="openTrackingModal()" class="text-gray-300 hover:text-brand-gold p-2 rounded-lg relative transition-colors" title="Track Order">
+                        <i class="fa-solid fa-box text-lg"></i>
+                    </button>
+
+                    <!-- Wishlist -->
+                    <button onclick="toggleWishlistModal()" class="text-gray-300 hover:text-amber-400 p-2 rounded-lg relative transition-colors" title="Wishlist">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                        <span id="wishlist-badge" class="absolute -top-1 -right-1 bg-amber-500 text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Cart Drawer Trigger -->
+                    <button onclick="toggleCartDrawer()" class="gold-btn px-4 py-2.5 rounded-full flex items-center gap-2.5 text-sm shadow-md">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span class="hidden sm:inline">Bag</span>
+                        <span id="cart-badge" class="bg-brand-dark text-brand-gold text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-brand-surface/95 px-4 py-4 space-y-3">
+            <div class="relative w-full mb-3">
+                <input type="text" id="mobile-search-input" placeholder="Search product decor..." 
+                       class="w-full bg-brand-dark/80 border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm text-gray-200">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+            </div>
+            <a href="#customizer" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">✨ Live 3D Customizer</a>
+            <a href="#catalog" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">🛍️ All Products Catalog</a>
+            <a href="#wall-inspiration" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">🖼️ Wall Gallery Inspiration</a>
+            <a href="#reviews" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">⭐ Verified Customer Reviews</a>
+            <button onclick="openTrackingModal()" class="w-full text-left py-2 text-brand-gold text-sm font-medium flex items-center gap-2">
+                <i class="fa-solid fa-truck"></i> Track Existing Order
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative pt-10 pb-20 overflow-hidden">
+            <!-- Background Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-80 h-80 bg-amber-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Content -->
+                    <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-brand-gold/30 text-amber-300 text-xs font-semibold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            Next-Gen Acrylic Personalization Studio
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight text-white">
+                            Turn Cherished Memories into <span class="gold-gradient-text block mt-1">High-Gloss Acrylic Masterpieces</span>
+                        </h1>
+
+                        <p class="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            Ultra-HD UV printed on 3mm & 5mm optical-grade gallery acrylic. Frameless brilliance, fade-proof colors, and wall mounting systems engineered for elegance.
+                        </p>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#customizer" class="gold-btn px-8 py-4 rounded-full text-base font-bold shadow-xl flex items-center gap-3 group">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg group-hover:rotate-12 transition-transform"></i>
+                                Launch Live Studio Customizer
+                            </a>
+                            <a href="#catalog" class="px-7 py-4 rounded-full glass-card hover:bg-white/10 text-white font-medium text-base transition-all flex items-center gap-2">
+                                View Collections <i class="fa-solid fa-arrow-right text-xs text-brand-gold"></i>
+                            </a>
+                        </div>
+
+                        <!-- Feature Badges -->
+                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-white/10 text-left">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-brand-gold">
+                                    <i class="fa-solid fa-gem text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase">Gallery Acrylic</h4>
+                                    <p class="text-[11px] text-gray-400">Crystal Clear 3mm/5mm</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-brand-gold">
+                                    <i class="fa-solid fa-sun text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase">UV Print Tech</h4>
+                                    <p class="text-[11px] text-gray-400">100+ Years Fade Proof</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-brand-gold">
+                                    <i class="fa-solid fa-bolt text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase">48hr Dispatch</h4>
+                                    <p class="text-[11px] text-gray-400">Jaipur & BLR Hubs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Showcase -->
+                    <div class="lg:col-span-6 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            
+                            <!-- Hero Primary Frame Mockup -->
+                            <div class="relative rounded-2xl p-4 bg-gradient-to-b from-white/10 to-white/0 border border-white/15 backdrop-blur-sm shadow-2xl">
+                                <div class="relative aspect-[4/3] rounded-xl overflow-hidden acrylic-glass-frame group">
+                                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" 
+                                         alt="Acrylic Frame Showcase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    
+                                    <!-- Metallic Corner Studs -->
+                                    <div class="stud top-3 left-3"></div>
+                                    <div class="stud top-3 right-3"></div>
+                                    <div class="stud bottom-3 left-3"></div>
+                                    <div class="stud bottom-3 right-3"></div>
+
+                                    <!-- Ambient Bottom Badge Overlay -->
+                                    <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-lg border border-white/10 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-xs text-brand-gold font-semibold uppercase tracking-wide">Acrylic Wall Art Frame</p>
+                                            <p class="text-sm font-bold text-white">Size: 24" x 18" • Gold Accent Edition</p>
+                                        </div>
+                                        <span class="text-xs bg-amber-500/20 text-amber-300 font-bold px-2.5 py-1 rounded-md border border-amber-500/30">
+                                            ₹ 1,899
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Secondary Item Badge -->
+                            <div class="absolute -bottom-6 -left-6 bg-brand-card/90 border border-brand-gold/30 backdrop-blur-md p-3.5 rounded-xl shadow-2xl flex items-center gap-3 hidden sm:flex animate-bounce-slow">
+                                <div class="w-12 h-12 rounded-lg overflow-hidden relative">
+                                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Illuminated LED Nameplates</p>
+                                    <p class="text-[11px] text-amber-300">Warm Glow • Weatherproof</p>
+                                </div>
+                            </div>
+
+                            <div class="absolute -top-6 -right-6 bg-brand-card/90 border border-brand-gold/30 backdrop-blur-md p-3 rounded-xl shadow-2xl text-center hidden sm:block">
+                                <span class="text-2xl font-bold text-amber-400">4.9 ★</span>
+                                <p class="text-[10px] text-gray-300 uppercase">15,000+ Happy Homes</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Interactive Studio / Customizer (Hero Feature) -->
+        <section id="customizer" class="py-16 bg-gradient-to-b from-brand-dark via-brand-surface to-brand-dark relative border-t border-b border-brand-gold/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-full border border-brand-gold/20">
+                        Interactive Live Previewer
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-3">
+                        Design Your Custom Acrylic Decor in Real-Time
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base mt-2">
+                        Upload your photo or choose a preset, customize size, shape, text, and switch room wall contexts instantly before ordering.
+                    </p>
+                </div>
+
+                <!-- Customizer Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- LEFT COLUMN: Live Studio Preview Container (7 cols) -->
+                    <div class="lg:col-span-7 space-y-4">
+                        
+                        <!-- Room Background Switcher Controls -->
+                        <div class="flex items-center justify-between glass-panel p-2 rounded-xl text-xs overflow-x-auto">
+                            <span class="text-gray-400 font-medium px-2 hidden sm:inline"><i class="fa-solid fa-house-laptop text-brand-gold mr-1"></i> Room Context:</span>
+                            <div class="flex gap-2">
+                                <button onclick="changeRoomBg('living')" class="room-btn active bg-brand-gold text-brand-dark px-3 py-1.5 rounded-lg font-semibold transition-all">
+                                    Living Room
+                                </button>
+                                <button onclick="changeRoomBg('bedroom')" class="room-btn bg-brand-card hover:bg-white/10 text-gray-300 px-3 py-1.5 rounded-lg font-medium transition-all">
+                                    Bedroom
+                                </button>
+                                <button onclick="changeRoomBg('desk')" class="room-btn bg-brand-card hover:bg-white/10 text-gray-300 px-3 py-1.5 rounded-lg font-medium transition-all">
+                                    Executive Desk
+                                </button>
+                                <button onclick="changeRoomBg('gallery')" class="room-btn bg-brand-card hover:bg-white/10 text-gray-300 px-3 py-1.5 rounded-lg font-medium transition-all">
+                                    Art Gallery
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Room Backdrop Area -->
+                        <div id="room-canvas-container" class="room-bg-living relative w-full aspect-[4/3] rounded-2xl border border-white/15 overflow-hidden flex items-center justify-center p-6 sm:p-12 shadow-2xl transition-all duration-500">
+                            
+                            <!-- Dynamic Product Mockup Display -->
+                            <div id="studio-acrylic-mockup" class="acrylic-glass-frame relative transition-all duration-300 max-w-full max-h-full flex items-center justify-center rounded-lg overflow-hidden filter-original">
+                                
+                                <!-- Photo Image Element -->
+                                <img id="studio-photo-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" 
+                                     alt="Custom Studio Photo" class="w-full h-full object-cover min-w-[220px] min-h-[180px] max-h-[380px]">
+
+                                <!-- Metallic Corner Studs (Shown for Framed Stud styles) -->
+                                <div id="stud-tl" class="stud top-2 left-2"></div>
+                                <div id="stud-tr" class="stud top-2 right-2"></div>
+                                <div id="stud-bl" class="stud bottom-2 left-2"></div>
+                                <div id="stud-br" class="stud bottom-2 right-2"></div>
+
+                                <!-- Overlay Custom Personalized Text (For Nameplates, Clocks, Messages) -->
+                                <div id="studio-text-overlay" class="absolute inset-x-0 bottom-4 text-center px-4 pointer-events-none drop-shadow-md hidden">
+                                    <p id="overlay-text-content" class="text-white font-bold text-lg tracking-wide font-sans">
+                                        The Sharma Family
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Live Dimensions Badge -->
+                            <div class="absolute bottom-3 right-3 bg-black/75 border border-white/10 px-3 py-1 rounded-full text-[11px] text-amber-300 font-semibold backdrop-blur-md">
+                                <span id="studio-size-indicator">18" x 12"</span> • <span id="studio-thickness-indicator">3mm Optical Acrylic</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Quick Visual Actions below canvas -->
+                        <div class="flex items-center justify-between text-xs text-gray-400 px-2">
+                            <span><i class="fa-solid fa-shield-check text-emerald-400 mr-1"></i> Pre-flight photo resolution check included</span>
+                            <button onclick="downloadDesignPreview()" class="text-amber-300 hover:text-white transition-colors flex items-center gap-1 font-medium">
+                                <i class="fa-solid fa-download"></i> Save High-Res Preview
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN: Studio Controls Sidebar (5 cols) -->
+                    <div class="lg:col-span-5 glass-panel p-6 rounded-2xl space-y-6">
+                        
+                        <!-- Control Tabs -->
+                        <div class="flex border-b border-white/10 gap-4">
+                            <button onclick="switchStudioTab('photo')" id="tab-btn-photo" class="pb-2 text-sm font-bold text-brand-gold border-b-2 border-brand-gold transition-all">
+                                1. Photo & Style
+                            </button>
+                            <button onclick="switchStudioTab('shape')" id="tab-btn-shape" class="pb-2 text-sm font-medium text-gray-400 hover:text-white transition-all">
+                                2. Shape & Size
+                            </button>
+                            <button onclick="switchStudioTab('personalize')" id="tab-btn-personalize" class="pb-2 text-sm font-medium text-gray-400 hover:text-white transition-all">
+                                3. Text & Extras
+                            </button>
+                        </div>
+
+                        <!-- TAB 1 CONTENT: Photo & Preset Selection -->
+                        <div id="tab-content-photo" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Upload Your High-Res Photo</label>
+                                <div class="relative">
+                                    <input type="file" id="user-photo-input" accept="image/*" class="hidden" onchange="handleUserPhotoUpload(event)">
+                                    <label for="user-photo-input" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-dashed border-brand-gold/40 hover:border-brand-gold bg-brand-card cursor-pointer transition-all hover:bg-brand-gold/5">
+                                        <i class="fa-solid fa-cloud-arrow-up text-brand-gold text-lg"></i>
+                                        <span class="text-xs font-semibold text-gray-200">Click to Select Photo from Device</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Sample Photo Presets -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Or Choose Sample Preset</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=200&q=80" 
+                                         onclick="setStudioImage(this.src)" class="w-full h-14 object-cover rounded-lg cursor-pointer border border-white/10 hover:border-brand-gold transition-all">
+                                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=200&q=80" 
+                                         onclick="setStudioImage(this.src)" class="w-full h-14 object-cover rounded-lg cursor-pointer border border-white/10 hover:border-brand-gold transition-all">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
+                                         onclick="setStudioImage(this.src)" class="w-full h-14 object-cover rounded-lg cursor-pointer border border-white/10 hover:border-brand-gold transition-all">
+                                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80" 
+                                         onclick="setStudioImage(this.src)" class="w-full h-14 object-cover rounded-lg cursor-pointer border border-white/10 hover:border-brand-gold transition-all">
+                                </div>
+                            </div>
+
+                            <!-- Photo Filter Selector -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Photo Enhancement Filter</label>
+                                <div class="grid grid-cols-4 gap-2 text-center text-[11px]">
+                                    <button onclick="applyPhotoFilter('original')" class="p-2 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-gray-200">Original</button>
+                                    <button onclick="applyPhotoFilter('vivid')" class="p-2 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-gray-200">Vivid Color</button>
+                                    <button onclick="applyPhotoFilter('bw')" class="p-2 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-gray-200">Classic B&W</button>
+                                    <button onclick="applyPhotoFilter('warm')" class="p-2 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-gray-200">Warm Vintage</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2 CONTENT: Shape, Framing & Size Selection -->
+                        <div id="tab-content-shape" class="space-y-5 hidden">
+                            <!-- Product Category Type -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Product Category</label>
+                                <select id="studio-product-type" onchange="recalculateStudioPrice()" class="w-full bg-brand-card border border-white/15 rounded-xl py-2.5 px-3 text-xs text-white focus:border-brand-gold">
+                                    <option value="frame">Acrylic Wall Frame (Frameless Studs)</option>
+                                    <option value="nameplate">Illuminated Acrylic Nameplate</option>
+                                    <option value="clock">Custom Photo Acrylic Wall Clock</option>
+                                    <option value="desk">Acrylic Desk Stand Frame</option>
+                                </select>
+                            </div>
+
+                            <!-- Aspect Ratio / Shape -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Shape & Style</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button onclick="setStudioShape('landscape')" class="p-2.5 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-xs text-center text-gray-200">
+                                        <i class="fa-regular fa-image text-base block mb-1"></i> Landscape
+                                    </button>
+                                    <button onclick="setStudioShape('portrait')" class="p-2.5 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-xs text-center text-gray-200">
+                                        <i class="fa-regular fa-image text-base block mb-1 rotate-90"></i> Portrait
+                                    </button>
+                                    <button onclick="setStudioShape('circle')" class="p-2.5 rounded-lg bg-brand-card border border-white/10 hover:border-brand-gold text-xs text-center text-gray-200">
+                                        <i class="fa-regular fa-circle text-base block mb-1"></i> Circular Cut
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Size Selector -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Dimensions (Inches)</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button onclick="setStudioSize('12x8', 899)" class="size-btn p-2.5 rounded-lg bg-brand-card border border-white/10 text-left hover:border-brand-gold">
+                                        <div class="text-xs font-bold text-white">12" x 8" (Compact)</div>
+                                        <div class="text-[11px] text-amber-400">₹ 899</div>
+                                    </button>
+                                    <button onclick="setStudioSize('18x12', 1499)" class="size-btn p-2.5 rounded-lg bg-brand-card border border-brand-gold text-left">
+                                        <div class="text-xs font-bold text-white">18" x 12" (Popular)</div>
+                                        <div class="text-[11px] text-amber-400">₹ 1,499</div>
+                                    </button>
+                                    <button onclick="setStudioSize('24x16', 2399)" class="size-btn p-2.5 rounded-lg bg-brand-card border border-white/10 text-left hover:border-brand-gold">
+                                        <div class="text-xs font-bold text-white">24" x 16" (Large)</div>
+                                        <div class="text-[11px] text-amber-400">₹ 2,399</div>
+                                    </button>
+                                    <button onclick="setStudioSize('36x24', 3999)" class="size-btn p-2.5 rounded-lg bg-brand-card border border-white/10 text-left hover:border-brand-gold">
+                                        <div class="text-xs font-bold text-white">36" x 24" (Grand Gallery)</div>
+                                        <div class="text-[11px] text-amber-400">₹ 3,999</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 3 CONTENT: Text Overlay & Hardware Options -->
+                        <div id="tab-content-personalize" class="space-y-5 hidden">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Add Personalized Text / Family Name</label>
+                                <input type="text" id="studio-text-input" placeholder="e.g. The Sharma Family, Est. 2024" 
+                                       oninput="updateStudioTextOverlay()"
+                                       class="w-full bg-brand-card border border-white/15 rounded-xl py-2 px-3 text-xs text-white placeholder-gray-500 focus:border-brand-gold">
+                            </div>
+
+                            <!-- Hardware Backlight Toggle -->
+                            <div class="bg-brand-card p-3 rounded-xl border border-white/10 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Warm LED Aura Backlight</p>
+                                        <p class="text-[11px] text-gray-400">Warm white ambient glow strip</p>
+                                    </div>
+                                    <input type="checkbox" id="led-backlight-check" onchange="toggleLedBacklight()" class="w-4 h-4 accent-amber-500 cursor-pointer">
+                                </div>
+                                <div class="flex items-center justify-between border-t border-white/10 pt-2">
+                                    <div>
+                                        <p class="text-xs font-bold text-white">5mm Ultra-Thick Glass Option</p>
+                                        <p class="text-[11px] text-gray-400">Extra depth & rigid durability (+₹300)</p>
+                                    </div>
+                                    <input type="checkbox" id="thick-glass-check" onchange="recalculateStudioPrice()" class="w-4 h-4 accent-amber-500 cursor-pointer">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Summary & Add to Cart -->
+                        <div class="border-t border-white/10 pt-4 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Total Calculated Price</span>
+                                    <span id="studio-total-price" class="text-2xl font-bold text-brand-gold">₹ 1,499</span>
+                                    <span class="text-[10px] text-emerald-400 block"><i class="fa-solid fa-truck-fast"></i> Free Express Delivery</span>
+                                </div>
+                                <button onclick="addStudioItemToCart()" class="gold-btn px-6 py-3 rounded-full text-xs font-bold shadow-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-bag-shopping"></i> Add Custom Design To Bag
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Wall Inspiration Gallery -->
+        <section id="wall-inspiration" class="py-16 bg-brand-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold">Curated Sets</span>
+                        <h2 class="text-3xl font-serif font-bold text-white mt-1">Multi-Frame Wall Inspiration Sets</h2>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">
+                        Create stunning story walls with coordinated acrylic frame sets. Perfect for living room feature walls.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Layout Card 1 -->
+                    <div class="glass-card rounded-2xl overflow-hidden group">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-brand-dark/80 text-brand-gold text-[10px] font-bold px-2.5 py-1 rounded-full border border-brand-gold/30">Set of 3 Trio</span>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="text-lg font-bold text-white">The Minimalist Living Room Trio</h3>
+                            <p class="text-xs text-gray-400">Includes 3 matching 12x18" portrait acrylic panels with metallic mounting studs.</p>
+                            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                                <span class="text-sm font-bold text-brand-gold">₹ 3,499 <span class="text-xs text-gray-500 line-through">₹ 4,499</span></span>
+                                <button onclick="loadLayoutToCustomizer('trio')" class="text-xs font-bold text-white bg-white/10 hover:bg-brand-gold hover:text-brand-dark px-3 py-1.5 rounded-lg transition-all">
+                                    Customize Set
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layout Card 2 -->
+                    <div class="glass-card rounded-2xl overflow-hidden group">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-brand-dark/80 text-brand-gold text-[10px] font-bold px-2.5 py-1 rounded-full border border-brand-gold/30">Set of 6 Grid</span>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="text-lg font-bold text-white">Family Memory Grid Wall</h3>
+                            <p class="text-xs text-gray-400">6 Square 10x10" Acrylic frames designed for symmetrical square photo layouts.</p>
+                            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                                <span class="text-sm font-bold text-brand-gold">₹ 4,999 <span class="text-xs text-gray-500 line-through">₹ 6,299</span></span>
+                                <button onclick="loadLayoutToCustomizer('grid')" class="text-xs font-bold text-white bg-white/10 hover:bg-brand-gold hover:text-brand-dark px-3 py-1.5 rounded-lg transition-all">
+                                    Customize Set
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layout Card 3 -->
+                    <div class="glass-card rounded-2xl overflow-hidden group">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-brand-dark/80 text-brand-gold text-[10px] font-bold px-2.5 py-1 rounded-full border border-brand-gold/30">Centerpiece + Duo</span>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="text-lg font-bold text-white">Executive Gallery Showcase</h3>
+                            <p class="text-xs text-gray-400">1 Grand 24x16" Center Frame with 2 Flanking 12x8" Side Accent Acrylics.</p>
+                            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+                                <span class="text-sm font-bold text-brand-gold">₹ 3,899 <span class="text-xs text-gray-500 line-through">₹ 5,100</span></span>
+                                <button onclick="loadLayoutToCustomizer('showcase')" class="text-xs font-bold text-white bg-white/10 hover:bg-brand-gold hover:text-brand-dark px-3 py-1.5 rounded-lg transition-all">
+                                    Customize Set
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Catalog Section -->
+        <section id="catalog" class="py-16 bg-brand-surface relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-gold">Handcrafted Excellence</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Personalized Gift Collections</h2>
+                    <p class="text-gray-400 text-sm mt-2">Explore our complete range of premium acrylic decor, backlit nameplates, photobooks, and magnets.</p>
+                </div>
+
+                <!-- Category Filters Tabs -->
+                <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-10" id="catalog-category-tabs">
+                    <button onclick="filterCatalog('all')" class="cat-tab active bg-brand-gold text-brand-dark px-4 py-2 rounded-full text-xs font-bold transition-all">
+                        All Products
+                    </button>
+                    <button onclick="filterCatalog('frames')" class="cat-tab bg-brand-card hover:bg-white/10 text-gray-300 px-4 py-2 rounded-full text-xs font-medium transition-all">
+                        Acrylic Frames
+                    </button>
+                    <button onclick="filterCatalog('nameplates')" class="cat-tab bg-brand-card hover:bg-white/10 text-gray-300 px-4 py-2 rounded-full text-xs font-medium transition-all">
+                        Nameplates
+                    </button>
+                    <button onclick="filterCatalog('clocks')" class="cat-tab bg-brand-card hover:bg-white/10 text-gray-300 px-4 py-2 rounded-full text-xs font-medium transition-all">
+                        Custom Clocks
+                    </button>
+                    <button onclick="filterCatalog('photobooks')" class="cat-tab bg-brand-card hover:bg-white/10 text-gray-300 px-4 py-2 rounded-full text-xs font-medium transition-all">
+                        Photobooks
+                    </button>
+                    <button onclick="filterCatalog('magnets')" class="cat-tab bg-brand-card hover:bg-white/10 text-gray-300 px-4 py-2 rounded-full text-xs font-medium transition-all">
+                        Acrylic Magnets
+                    </button>
+                </div>
+
+                <!-- Product Catalog Grid -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Populated Dynamically via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Craftsmanship & Dual Hub Section -->
+        <section id="craftsmanship" class="py-16 bg-brand-dark border-t border-white/10 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold">Pan-India Express Logistics</span>
+                        <h2 class="text-3xl font-serif font-bold text-white mt-2 leading-tight">
+                            Crafted in Jaipur & Bengaluru Production Hubs
+                        </h2>
+                        <p class="text-gray-300 text-sm mt-4 leading-relaxed">
+                            To ensure lightning-fast turnaround times and zero shipping transit damage, HsCraft operates dual specialized UV-printing and precision laser-cutting facilities in Jaipur (North Hub) and Bengaluru (South Hub).
+                        </p>
+
+                        <div class="space-y-4 mt-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-brand-gold flex-shrink-0">
+                                    <i class="fa-solid fa-microscope text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Manual Image Quality Audit</h4>
+                                    <p class="text-xs text-gray-400">Our design team manually enhances resolution and contrast before printing to avoid pixelation.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-brand-gold flex-shrink-0">
+                                    <i class="fa-solid fa-box-open text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Safe Transit Wooden Frame Packaging</h4>
+                                    <p class="text-xs text-gray-400">Every acrylic piece is wrapped with peel-off protective films and enclosed in drop-tested wooden corner boxes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Hub Visual -->
+                    <div class="glass-panel p-6 rounded-2xl relative">
+                        <div class="text-center mb-4">
+                            <span class="text-xs text-amber-300 font-bold uppercase">Real-Time Hub Express Routes</span>
+                        </div>
+                        <div class="relative bg-brand-surface rounded-xl p-6 border border-white/10 text-center space-y-6">
+                            <div class="flex justify-around items-center border-b border-white/10 pb-4">
+                                <div class="text-center">
+                                    <div class="w-12 h-12 mx-auto rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold font-bold text-lg border border-brand-gold/40">
+                                        JPR
+                                    </div>
+                                    <p class="text-xs font-bold text-white mt-1">Jaipur Hub</p>
+                                    <p class="text-[10px] text-gray-400">North & Central India</p>
+                                </div>
+                                <i class="fa-solid fa-plane text-brand-gold animate-pulse text-lg"></i>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 mx-auto rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold font-bold text-lg border border-brand-gold/40">
+                                        BLR
+                                    </div>
+                                    <p class="text-xs font-bold text-white mt-1">Bengaluru Hub</p>
+                                    <p class="text-[10px] text-gray-400">South & West India</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-emerald-400 font-semibold">
+                                <i class="fa-solid fa-clock mr-1"></i> Average Transit Time: 2 - 4 Business Days Across India
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Customer Reviews Section -->
+        <section id="reviews" class="py-16 bg-brand-surface">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <div class="flex items-center justify-center gap-1 text-amber-400 text-lg mb-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <h2 class="text-3xl font-serif font-bold text-white">Over 15,000+ Loved Acrylic Memories</h2>
+                    <p class="text-gray-400 text-sm mt-1">Verified reviews from customers across India.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div class="glass-card p-6 rounded-2xl space-y-4">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-gray-300 italic leading-relaxed">
+                            "The glossy reflection on the acrylic wall frame is unreal! Looked even better than screen preview. Delivered to Delhi in just 3 days with perfect wooden packaging."
+                        </p>
+                        <div class="flex items-center gap-3 pt-2 border-t border-white/10">
+                            <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-brand-gold font-bold text-xs">
+                                RK
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Rohit K.</h4>
+                                <span class="text-[10px] text-gray-500">Verified Buyer • Delhi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-4">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-gray-300 italic leading-relaxed">
+                            "Ordered an illuminated nameplate for our new apartment in Bengaluru. The warm LED glow behind the golden acrylic letters gives such a warm welcome at night!"
+                        </p>
+                        <div class="flex items-center gap-3 pt-2 border-t border-white/10">
+                            <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-brand-gold font-bold text-xs">
+                                SP
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Sneha P.</h4>
+                                <span class="text-[10px] text-gray-500">Verified Buyer • Bengaluru</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-4">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-gray-300 italic leading-relaxed">
+                            "Gifted a customized photobook & acrylic desk stand to my sister for her anniversary. Premium print clarity and sturdy metallic studs. Super happy!"
+                        </p>
+                        <div class="flex items-center gap-3 pt-2 border-t border-white/10">
+                            <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-brand-gold font-bold text-xs">
+                                AM
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Ananya M.</h4>
+                                <span class="text-[10px] text-gray-500">Verified Buyer • Mumbai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Slide-Out Cart Drawer -->
+    <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+    
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-brand-surface border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <!-- Header -->
+        <div class="p-4 border-b border-white/10 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-brand-gold"></i> Your Shopping Bag
+            </h3>
+            <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List Container -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-4 space-y-4">
+            <!-- Populated Dynamically via JS -->
+        </div>
+
+        <!-- Cart Footer & Coupon Box -->
+        <div class="p-4 border-t border-white/10 bg-brand-dark/90 space-y-3">
+            
+            <!-- Coupon Code Input -->
+            <div class="flex gap-2">
+                <input type="text" id="coupon-input" placeholder="Promo Code (e.g. HSCRAFT10)" class="flex-grow bg-brand-card border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brand-gold">
+                <button onclick="applyCouponCode()" class="bg-white/10 hover:bg-brand-gold hover:text-brand-dark text-xs font-bold text-white px-3 py-2 rounded-lg transition-all">
+                    Apply
+                </button>
+            </div>
+            <div id="coupon-status-msg" class="text-[11px] font-medium hidden"></div>
+
+            <!-- Pricing Breakdown -->
+            <div class="space-y-1.5 text-xs text-gray-300 pt-2 border-t border-white/10">
+                <div class="flex justify-between">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">₹ 0</span>
+                </div>
+                <div class="flex justify-between text-emerald-400">
+                    <span>Discount</span>
+                    <span id="cart-discount">- ₹ 0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>GST & Express Shipping</span>
+                    <span class="text-emerald-400">FREE</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold text-white pt-2 border-t border-white/10">
+                    <span>Grand Total</span>
+                    <span id="cart-grand-total" class="text-brand-gold">₹ 0</span>
+                </div>
+            </div>
+
+            <!-- Checkout Button -->
+            <button onclick="openCheckoutModal()" class="w-full gold-btn py-3.5 rounded-xl font-bold text-sm shadow-xl flex items-center justify-center gap-2">
+                Proceed To Checkout <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Interactive Order Tracking Modal -->
+    <div id="tracking-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 relative space-y-6 border border-brand-gold/30">
+            
+            <button onclick="closeTrackingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center">
+                <h3 class="text-xl font-serif font-bold text-white">Track Order Status</h3>
+                <p class="text-xs text-gray-400 mt-1">Enter your HsCraft Order ID to see real-time hub dispatch tracking.</p>
+            </div>
+
+            <div class="flex gap-2">
+                <input type="text" id="tracking-input" value="HSC-9842" placeholder="e.g. HSC-9842" class="flex-grow bg-brand-card border border-white/20 rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-gold">
+                <button onclick="performOrderTrack()" class="gold-btn px-5 py-2.5 rounded-xl text-xs font-bold">
+                    Track
+                </button>
+            </div>
+
+            <!-- Tracking Status Result Container -->
+            <div id="tracking-result-box" class="space-y-4 pt-4 border-t border-white/10">
+                <div class="flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Order Reference: <strong class="text-white" id="track-id-disp">HSC-9842</strong></span>
+                    <span class="bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30 text-[10px]">IN PRODUCTION</span>
+                </div>
+
+                <!-- Vertical Progress Stepper -->
+                <div class="space-y-4 text-xs relative pl-6 border-l-2 border-brand-gold/40 my-4">
+                    <div class="relative">
+                        <span class="w-3 h-3 rounded-full bg-brand-gold absolute -left-[31px] top-0.5 ring-4 ring-brand-dark"></span>
+                        <p class="font-bold text-white">Order Confirmed & Photo Verified</p>
+                        <p class="text-[10px] text-gray-400">Image HD DPI resolution check passed</p>
+                    </div>
+                    <div class="relative">
+                        <span class="w-3 h-3 rounded-full bg-brand-gold absolute -left-[31px] top-0.5 ring-4 ring-brand-dark"></span>
+                        <p class="font-bold text-white">Laser Cut & Ultra-HD UV Printing</p>
+                        <p class="text-[10px] text-brand-gold">In Progress at Jaipur Hub Facility</p>
+                    </div>
+                    <div class="relative opacity-50">
+                        <span class="w-3 h-3 rounded-full bg-gray-600 absolute -left-[31px] top-0.5 ring-4 ring-brand-dark"></span>
+                        <p class="font-bold text-white">Quality Audit & Wooden Box Packing</p>
+                        <p class="text-[10px] text-gray-400">Scheduled for Today Evening</p>
+                    </div>
+                    <div class="relative opacity-50">
+                        <span class="w-3 h-3 rounded-full bg-gray-600 absolute -left-[31px] top-0.5 ring-4 ring-brand-dark"></span>
+                        <p class="font-bold text-white">Dispatched via Bluedart Express</p>
+                        <p class="text-[10px] text-gray-400">Estimated Delivery: 2 Days</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Simulated Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl p-6 sm:p-8 relative space-y-6 my-8 border border-brand-gold/30">
+            
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="border-b border-white/10 pb-4">
+                <h3 class="text-2xl font-serif font-bold text-white">HsCraft Secure Checkout</h3>
+                <p class="text-xs text-gray-400 mt-1">Complete your delivery address and payment choice.</p>
+            </div>
+
+            <form id="checkout-form" onsubmit="handlePlaceOrder(event)" class="space-y-6">
+                <!-- Shipping Details -->
+                <div class="space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-gold flex items-center gap-2">
+                        <i class="fa-solid fa-truck"></i> 1. Delivery Address
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="block text-gray-300 mb-1">Full Name *</label>
+                            <input type="text" required placeholder="John Doe" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-1">Mobile Number (For WhatsApp Updates) *</label>
+                            <input type="tel" required placeholder="+91 9876543210" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-gray-300 mb-1">Shipping Address *</label>
+                            <input type="text" required placeholder="Flat, Building, Street Area" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-1">City / Town *</label>
+                            <input type="text" required placeholder="e.g. Mumbai" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-1">Pincode *</label>
+                            <input type="text" required placeholder="400001" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-gold flex items-center gap-2">
+                        <i class="fa-solid fa-credit-card"></i> 2. Select Payment Option
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <label class="glass-card p-3 rounded-xl flex items-center gap-2 cursor-pointer border-brand-gold">
+                            <input type="radio" name="payment-method" value="upi" checked class="accent-amber-500">
+                            <div>
+                                <p class="font-bold text-white">Instant UPI</p>
+                                <p class="text-[10px] text-emerald-400">Extra ₹50 Off</p>
+                            </div>
+                        </label>
+                        <label class="glass-card p-3 rounded-xl flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="payment-method" value="card" class="accent-amber-500">
+                            <div>
+                                <p class="font-bold text-white">Cards / NetBanking</p>
+                                <p class="text-[10px] text-gray-400">All Major Banks</p>
+                            </div>
+                        </label>
+                        <label class="glass-card p-3 rounded-xl flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="payment-method" value="cod" class="accent-amber-500">
+                            <div>
+                                <p class="font-bold text-white">Cash On Delivery</p>
+                                <p class="text-[10px] text-gray-400">Verified Pincodes</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Order Final Button -->
+                <div class="border-t border-white/10 pt-4 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-gray-400 block">Total Amount</span>
+                        <span id="checkout-final-amount" class="text-2xl font-bold text-brand-gold">₹ 0</span>
+                    </div>
+                    <button type="submit" class="gold-btn px-8 py-3.5 rounded-full font-bold text-sm shadow-xl">
+                        <i class="fa-solid fa-lock mr-2"></i> Pay & Place Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Completion Success Toast / Modal -->
+    <div id="order-success-modal" class="fixed inset-0 bg-black/90 backdrop-blur-lg z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md rounded-2xl p-8 text-center space-y-6 border border-emerald-500/40">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto text-3xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <h3 class="text-2xl font-serif font-bold text-white">Order Confirmed!</h3>
+                <p class="text-xs text-gray-300 mt-2">Thank you for ordering with HsCraft! Your order ID is <strong id="success-order-id" class="text-amber-300">HSC-9842</strong>.</p>
+                <p class="text-[11px] text-gray-400 mt-1">Our design team is reviewing photo resolution for HD UV printing.</p>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex gap-3">
+                <button onclick="closeSuccessModalAndTrack()" class="gold-btn w-full py-3 rounded-xl text-xs font-bold">
+                    Track Order Live
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Notification Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/10 pt-16 pb-8 text-gray-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-brand-gold flex items-center justify-center text-brand-dark font-luxury font-bold">
+                            Hs
+                        </div>
+                        <span class="font-luxury font-bold text-xl tracking-wider text-white">
+                            Hs<span class="gold-gradient-text">Craft</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed max-w-sm">
+                        India’s premier custom photo acrylic wall decor & personalized luxury gifts brand. Engineered with optical gallery-grade acrylic and fade-proof UV technology.
+                    </p>
+                    <div class="flex items-center gap-4 text-base text-gray-300 pt-2">
+                        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#customizer" class="hover:text-brand-gold transition-colors">Acrylic Wall Frames</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-gold transition-colors">Illuminated Nameplates</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-gold transition-colors">Personalized Clocks</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-gold transition-colors">Hardcover Photobooks</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-gold transition-colors">Acrylic Fridge Magnets</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Care -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Customer Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#tracking" onclick="openTrackingModal()" class="hover:text-brand-gold transition-colors">Track Order Status</a></li>
+                        <li><a href="#craftsmanship" class="hover:text-brand-gold transition-colors">Jaipur & BLR Production Hubs</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Replacement Guarantee Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Image Quality Guidelines</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Corporate & Bulk Gifting</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Hub info -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Direct Support</h4>
+                    <p><i class="fa-brands fa-whatsapp text-green-500 mr-1.5"></i> WhatsApp: +91 98765 43210</p>
+                    <p><i class="fa-regular fa-envelope text-brand-gold mr-1.5"></i> support@hscraft.in</p>
+                    <p><i class="fa-solid fa-location-dot text-brand-gold mr-1.5"></i> Hubs: Jaipur & Bengaluru</p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Security Badges -->
+            <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
+                <p>© 2026 HsCraft India. Inspired by omgs.in, Built with enhanced 3D Studio Features.</p>
+                <div class="flex items-center gap-4">
+                    <span><i class="fa-solid fa-lock text-emerald-400 mr-1"></i> SSL 256-Bit Encrypted Checkout</span>
+                    <span>•</span>
+                    <span>100% Damage Replacement Guarantee</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        /* Global App State */
+        const state = {
+            cart: [],
+            wishlist: [],
+            coupon: { code: '', discountPercent: 0 },
+            studio: {
+                photoSrc: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80',
+                productType: 'frame',
+                shape: 'landscape',
+                size: '18x12',
+                basePrice: 1499,
+                hasLed: false,
+                hasThickGlass: false,
+                textOverlay: '',
+                filter: 'original',
+                roomBg: 'living'
+            }
+        };
+
+        /* Product Database */
+        const catalogProducts = [
+            {
+                id: 'p1',
+                title: 'Ultra-Gloss Acrylic Wall Frame',
+                category: 'frames',
+                price: 1499,
+                originalPrice: 2199,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+                badge: 'Best Seller'
+            },
+            {
+                id: 'p2',
+                title: 'Warm LED Backlit Acrylic Nameplate',
+                category: 'nameplates',
+                price: 1899,
+                originalPrice: 2599,
+                rating: 5.0,
+                image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80',
+                badge: 'LED Backlit'
+            },
+            {
+                id: 'p3',
+                title: 'Custom Photo Acrylic Wall Clock',
+                category: 'clocks',
+                price: 1299,
+                originalPrice: 1799,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=800&q=80',
+                badge: 'Silent Sweep'
+            },
+            {
+                id: 'p4',
+                title: 'Luxury Hardcover Acrylic Photobook',
+                category: 'photobooks',
+                price: 2499,
+                originalPrice: 3200,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+                badge: 'HD Layflat'
+            },
+            {
+                id: 'p5',
+                title: 'Acrylic Desk Photo Stand (5mm)',
+                category: 'frames',
+                price: 799,
+                originalPrice: 1199,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80',
+                badge: 'Compact'
+            },
+            {
+                id: 'p6',
+                title: 'Acrylic Fridge Magnets (Set of 4)',
+                category: 'magnets',
+                price: 599,
+                originalPrice: 899,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+                badge: 'Set of 4'
+            },
+            {
+                id: 'p7',
+                title: 'Golden Border Acrylic Nameplate',
+                category: 'nameplates',
+                price: 1699,
+                originalPrice: 2299,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                badge: 'Gold Foil'
+            },
+            {
+                id: 'p8',
+                title: 'Grand Gallery Square Acrylic Cut',
+                category: 'frames',
+                price: 2899,
+                originalPrice: 3799,
+                rating: 5.0,
+                image: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80',
+                badge: 'Grand 24x24'
+            }
+        ];
+
+        /* DOM Content Initialization */
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCatalogGrid(catalogProducts);
+            setupSearchListeners();
+            recalculateStudioPrice();
+        });
+
+        /* Studio Customizer Functions */
+        function switchStudioTab(tabName) {
+            ['photo', 'shape', 'personalize'].forEach(t => {
+                const contentEl = document.getElementById(`tab-content-${t}`);
+                const btnEl = document.getElementById(`tab-btn-${t}`);
+                if (t === tabName) {
+                    contentEl.classList.remove('hidden');
+                    btnEl.classList.add('text-brand-gold', 'border-b-2', 'border-brand-gold', 'font-bold');
+                    btnEl.classList.remove('text-gray-400');
+                } else {
+                    contentEl.classList.add('hidden');
+                    btnEl.classList.remove('text-brand-gold', 'border-b-2', 'border-brand-gold', 'font-bold');
+                    btnEl.classList.add('text-gray-400');
+                }
+            });
+        }
+
+        function changeRoomBg(room) {
+            state.studio.roomBg = room;
+            const container = document.getElementById('room-canvas-container');
+            container.className = `room-bg-${room} relative w-full aspect-[4/3] rounded-2xl border border-white/15 overflow-hidden flex items-center justify-center p-6 sm:p-12 shadow-2xl transition-all duration-500`;
+            
+            document.querySelectorAll('.room-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-gold', 'text-brand-dark', 'font-semibold');
+                btn.classList.add('bg-brand-card', 'text-gray-300');
+            });
+            event.target.classList.add('bg-brand-gold', 'text-brand-dark', 'font-semibold');
+            event.target.classList.remove('bg-brand-card', 'text-gray-300');
+        }
+
+        function handleUserPhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    setStudioImage(e.target.result);
+                    showToast('Custom photo loaded into studio!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function setStudioImage(src) {
+            state.studio.photoSrc = src;
+            document.getElementById('studio-photo-img').src = src;
+        }
+
+        function applyPhotoFilter(filter) {
+            state.studio.filter = filter;
+            const img = document.getElementById('studio-photo-img');
+            img.className = `w-full h-full object-cover min-w-[220px] min-h-[180px] max-h-[380px] filter-${filter}`;
+            showToast(`Filter applied: ${filter.toUpperCase()}`);
+        }
+
+        function setStudioShape(shape) {
+            state.studio.shape = shape;
+            const mockup = document.getElementById('studio-acrylic-mockup');
+            if (shape === 'circle') {
+                mockup.style.borderRadius = '9999px';
+                mockup.style.aspectRatio = '1 / 1';
+            } else if (shape === 'portrait') {
+                mockup.style.borderRadius = '12px';
+                mockup.style.aspectRatio = '3 / 4';
+            } else {
+                mockup.style.borderRadius = '12px';
+                mockup.style.aspectRatio = '4 / 3';
+            }
+            showToast(`Shape set to ${shape}`);
+        }
+
+        function setStudioSize(sizeStr, price) {
+            state.studio.size = sizeStr;
+            state.studio.basePrice = price;
+            document.getElementById('studio-size-indicator').innerText = sizeStr.replace('x', '" x "') + '"';
+            recalculateStudioPrice();
+        }
+
+        function updateStudioTextOverlay() {
+            const val = document.getElementById('studio-text-input').value;
+            state.studio.textOverlay = val;
+            const overlayEl = document.getElementById('studio-text-overlay');
+            const contentEl = document.getElementById('overlay-text-content');
+            
+            if (val.trim()) {
+                overlayEl.classList.remove('hidden');
+                contentEl.innerText = val;
+            } else {
+                overlayEl.classList.add('hidden');
+            }
+        }
+
+        function toggleLedBacklight() {
+            const checked = document.getElementById('led-backlight-check').checked;
+            state.studio.hasLed = checked;
+            const mockup = document.getElementById('studio-acrylic-mockup');
+            if (checked) {
+                mockup.classList.add('led-glow');
+            } else {
+                mockup.classList.remove('led-glow');
+            }
+            recalculateStudioPrice();
+        }
+
+        function recalculateStudioPrice() {
+            let total = state.studio.basePrice;
+            
+            const ledChecked = document.getElementById('led-backlight-check').checked;
+            if (ledChecked) total += 499;
+
+            const thickChecked = document.getElementById('thick-glass-check').checked;
+            if (thickChecked) {
+                total += 300;
+                document.getElementById('studio-thickness-indicator').innerText = '5mm Ultra Glass';
+            } else {
+                document.getElementById('studio-thickness-indicator').innerText = '3mm Optical Acrylic';
+            }
+
+            document.getElementById('studio-total-price').innerText = `₹ ${total.toLocaleString()}`;
+            return total;
+        }
+
+        function downloadDesignPreview() {
+            showToast('Generating high-res studio mockup preview...');
+            setTimeout(() => {
+                showToast('Preview saved to device!');
+            }, 1000);
+        }
+
+        function loadLayoutToCustomizer(layoutType) {
+            document.getElementById('customizer').scrollIntoView({ behavior: 'smooth' });
+            if (layoutType === 'trio') {
+                setStudioSize('12x8', 899);
+                showToast('Loaded Set of 3 Trio preset into customizer');
+            } else if (layoutType === 'grid') {
+                setStudioShape('square');
+                setStudioSize('12x8', 899);
+                showToast('Loaded Memory Grid layout into customizer');
+            } else {
+                setStudioSize('24x16', 2399);
+                showToast('Loaded Showcase layout into customizer');
+            }
+        }
+
+        /* Cart Management */
+        function addStudioItemToCart() {
+            const finalPrice = recalculateStudioPrice();
+            const item = {
+                id: 'custom-' + Date.now(),
+                title: `Custom ${state.studio.productType.toUpperCase()} (${state.studio.size}")`,
+                price: finalPrice,
+                image: state.studio.photoSrc,
+                details: `Size: ${state.studio.size} | Shape: ${state.studio.shape} ${state.studio.hasLed ? '| Warm LED' : ''} ${state.studio.textOverlay ? '| Text: ' + state.studio.textOverlay : ''}`,
+                quantity: 1
+            };
+
+            state.cart.push(item);
+            updateCartUI();
+            toggleCartDrawer();
+            showToast('Custom design added to shopping bag!');
+        }
+
+        function addCatalogToCart(productId) {
+            const prod = catalogProducts.find(p => p.id === productId);
+            if (!prod) return;
+
+            const existing = state.cart.find(item => item.id === prod.id);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                state.cart.push({
+                    id: prod.id,
+                    title: prod.title,
+                    price: prod.price,
+                    image: prod.image,
+                    details: 'Standard Size (18" x 12") • 3mm Optical Acrylic',
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`${prod.title} added to bag!`);
+        }
+
+        function updateCartQuantity(id, change) {
+            const item = state.cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    state.cart = state.cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const cartBadge = document.getElementById('cart-badge');
+            
+            // Badge total item count
+            const totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.innerText = totalItems;
+
+            if (state.cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-gray-600"></i>
+                        <p class="text-sm font-medium">Your shopping bag is empty.</p>
+                        <a href="#customizer" onclick="toggleCartDrawer()" class="inline-block text-xs text-brand-gold hover:underline">Customize an Acrylic Frame →</a>
+                    </div>
+                `;
+                document.getElementById('cart-subtotal').innerText = '₹ 0';
+                document.getElementById('cart-discount').innerText = '- ₹ 0';
+                document.getElementById('cart-grand-total').innerText = '₹ 0';
+                return;
+            }
+
+            let subtotal = 0;
+            container.innerHTML = state.cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                return `
+                    <div class="glass-card p-3 rounded-xl flex gap-3 items-center border-white/10">
+                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="text-xs font-bold text-white truncate">${item.title}</h4>
+                            <p class="text-[10px] text-gray-400 truncate">${item.details}</p>
+                            <span class="text-xs font-bold text-brand-gold block mt-1">₹ ${item.price.toLocaleString()}</span>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <div class="flex items-center gap-1 bg-brand-dark px-2 py-0.5 rounded border border-white/10 text-xs">
+                                <button onclick="updateCartQuantity('${item.id}', -1)" class="text-gray-400 hover:text-white px-1">-</button>
+                                <span class="text-white font-bold px-1">${item.quantity}</span>
+                                <button onclick="updateCartQuantity('${item.id}', 1)" class="text-gray-400 hover:text-white px-1">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Calculate Discount
+            const discount = (subtotal * state.coupon.discountPercent) / 100;
+            const grandTotal = Math.max(0, subtotal - discount);
+
+            document.getElementById('cart-subtotal').innerText = `₹ ${subtotal.toLocaleString()}`;
+            document.getElementById('cart-discount').innerText = `- ₹ ${discount.toLocaleString()}`;
+            document.getElementById('cart-grand-total').innerText = `₹ ${grandTotal.toLocaleString()}`;
+            document.getElementById('checkout-final-amount').innerText = `₹ ${grandTotal.toLocaleString()}`;
+        }
+
+        function toggleCartDrawer() {
+            const backdrop = document.getElementById('cart-drawer-backdrop');
+            const drawer = document.getElementById('cart-drawer');
+            
+            if (drawer.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('hidden');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                backdrop.classList.add('hidden');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        function applyCouponCode() {
+            const input = document.getElementById('coupon-input').value.trim().toUpperCase();
+            const msgEl = document.getElementById('coupon-status-msg');
+            
+            if (input === 'HSCRAFT10') {
+                state.coupon = { code: 'HSCRAFT10', discountPercent: 10 };
+                msgEl.innerText = '✓ Promo Code HSCRAFT10 Applied (10% OFF)';
+                msgEl.className = 'text-[11px] font-medium text-emerald-400 block';
+                showToast('Applied 10% Discount Coupon!');
+            } else if (input === 'FESTIVE20') {
+                state.coupon = { code: 'FESTIVE20', discountPercent: 20 };
+                msgEl.innerText = '✓ Promo Code FESTIVE20 Applied (20% OFF)';
+                msgEl.className = 'text-[11px] font-medium text-emerald-400 block';
+                showToast('Applied 20% Festive Coupon!');
+            } else {
+                msgEl.innerText = '✗ Invalid or expired coupon code';
+                msgEl.className = 'text-[11px] font-medium text-rose-400 block';
+            }
+            updateCartUI();
+        }
+
+        /* Order Tracking */
+        function openTrackingModal() {
+            document.getElementById('tracking-modal').classList.remove('hidden');
+        }
+
+        function closeTrackingModal() {
+            document.getElementById('tracking-modal').classList.add('hidden');
+        }
+
+        function performOrderTrack() {
+            const id = document.getElementById('tracking-input').value.trim() || 'HSC-9842';
+            document.getElementById('track-id-disp').innerText = id;
+            showToast(`Tracking status updated for ${id}`);
+        }
+
+        /* Checkout Modal */
+        function openCheckoutModal() {
+            if (state.cart.length === 0) {
+                showToast('Your bag is empty! Add items before checkout.');
+                return;
+            }
+            toggleCartDrawer();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function handlePlaceOrder(e) {
+            e.preventDefault();
+            const randomOrderId = 'HSC-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('success-order-id').innerText = randomOrderId;
+            
+            closeCheckoutModal();
+            document.getElementById('order-success-modal').classList.remove('hidden');
+            
+            // Reset Cart
+            state.cart = [];
+            updateCartUI();
+        }
+
+        function closeSuccessModalAndTrack() {
+            document.getElementById('order-success-modal').classList.add('hidden');
+            openTrackingModal();
+        }
+
+        /* Wishlist Toggle */
+        function toggleWishlistModal() {
+            showToast('Wishlist feature synced to your account!');
+        }
+
+        /* Catalog Grid Rendering */
+        function renderCatalogGrid(products) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="glass-card rounded-2xl overflow-hidden group flex flex-col justify-between border border-white/10 hover:border-brand-gold/40 transition-all duration-300">
+                    <div>
+                        <div class="relative aspect-square overflow-hidden bg-brand-dark">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-brand-dark/90 text-brand-gold text-[10px] font-bold px-2.5 py-1 rounded-full border border-brand-gold/30">
+                                ${p.badge}
+                            </span>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-white ml-0.5">${p.rating}</span>
+                                <span class="text-gray-500 text-[10px]">(120+ reviews)</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-white group-hover:text-brand-gold transition-colors truncate">${p.title}</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-base font-bold text-brand-gold">₹ ${p.price.toLocaleString()}</span>
+                                <span class="text-xs text-gray-500 line-through ml-1">₹ ${p.originalPrice.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <button onclick="addCatalogToCart('${p.id}')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-brand-gold hover:text-brand-dark text-xs font-bold text-white transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> Add To Bag
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCatalog(category) {
+            document.querySelectorAll('#catalog-category-tabs .cat-tab').forEach(btn => {
+                btn.classList.remove('bg-brand-gold', 'text-brand-dark', 'font-bold');
+                btn.classList.add('bg-brand-card', 'text-gray-300');
+            });
+            event.target.classList.add('bg-brand-gold', 'text-brand-dark', 'font-bold');
+            event.target.classList.remove('bg-brand-card', 'text-gray-300');
+
+            if (category === 'all') {
+                renderCatalogGrid(catalogProducts);
+            } else {
+                const filtered = catalogProducts.filter(p => p.category === category);
+                renderCatalogGrid(filtered);
+            }
+        }
+
+        /* Live Search Functionality */
+        function setupSearchListeners() {
+            const searchInput = document.getElementById('site-search-input');
+            const popover = document.getElementById('search-results-popover');
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                if (!query) {
+                    popover.classList.add('hidden');
+                    return;
+                }
+
+                const matches = catalogProducts.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+                if (matches.length > 0) {
+                    popover.classList.remove('hidden');
+                    popover.innerHTML = matches.map(m => `
+                        <div onclick="addCatalogToCart('${m.id}'); document.getElementById('search-results-popover').classList.add('hidden');" 
+                             class="p-2 hover:bg-white/10 rounded-lg flex items-center gap-3 cursor-pointer border-b border-white/5 last:border-none">
+                            <img src="${m.image}" class="w-10 h-10 object-cover rounded">
+                            <div>
+                                <p class="text-xs font-bold text-white">${m.title}</p>
+                                <p class="text-[10px] text-brand-gold">₹ ${m.price.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    popover.classList.remove('hidden');
+                    popover.innerHTML = `<p class="text-xs text-gray-400 text-center py-2">No matching products found.</p>`;
+                }
+            });
+
+            // Close popover when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !popover.contains(e.target)) {
+                    popover.classList.add('hidden');
+                }
+            });
+
+            // Mobile Navigation Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        /* Toast Alert System */
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'glass-panel text-white text-xs font-semibold px-4 py-3 rounded-xl border border-brand-gold/40 shadow-2xl flex items-center gap-2 animate-bounce-slow pointer-events-auto transition-all duration-300';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-brand-gold text-sm"></i> ${message}`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
