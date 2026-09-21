@@ -174,6 +174,57 @@
         .animate-ticker:hover {
             animation-play-state: paused;
         }
+
+        /* Demo Payment Gateway + Admin Panel */
+        .admin-shell {
+            background:
+                radial-gradient(circle at 10% 0%, rgba(212,175,55,.08), transparent 30%),
+                radial-gradient(circle at 100% 100%, rgba(99,102,241,.08), transparent 35%),
+                #0B0F17;
+        }
+        .admin-stat {
+            background: rgba(28,37,54,.72);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 16px;
+            padding: 18px;
+        }
+        .status-pill {
+            display:inline-flex; align-items:center; gap:.4rem;
+            padding:.28rem .6rem; border-radius:999px;
+            font-size:10px; font-weight:700; white-space:nowrap;
+        }
+        .status-pending { background:rgba(245,158,11,.12); color:#fbbf24; border:1px solid rgba(245,158,11,.25); }
+        .status-paid { background:rgba(16,185,129,.12); color:#34d399; border:1px solid rgba(16,185,129,.25); }
+        .status-processing { background:rgba(59,130,246,.12); color:#60a5fa; border:1px solid rgba(59,130,246,.25); }
+        .status-shipped { background:rgba(168,85,247,.12); color:#c084fc; border:1px solid rgba(168,85,247,.25); }
+        .status-delivered { background:rgba(16,185,129,.12); color:#6ee7b7; border:1px solid rgba(16,185,129,.25); }
+        .status-cancelled { background:rgba(244,63,94,.12); color:#fb7185; border:1px solid rgba(244,63,94,.25); }
+        .gateway-option.active {
+            border-color: rgba(212,175,55,.75);
+            background: rgba(212,175,55,.08);
+            box-shadow: 0 0 0 1px rgba(212,175,55,.2) inset;
+        }
+        .demo-qr {
+            width: 160px; height: 160px; padding: 10px;
+            background: #fff; border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0,0,0,.35);
+        }
+        .admin-table-wrap { overflow-x:auto; }
+        .admin-table { width:100%; min-width:880px; border-collapse:collapse; }
+        .admin-table th {
+            text-align:left; padding:11px 12px; color:#9ca3af; font-size:10px;
+            text-transform:uppercase; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,.08);
+        }
+        .admin-table td {
+            padding:12px; font-size:12px; color:#e5e7eb; border-bottom:1px solid rgba(255,255,255,.06);
+            vertical-align:middle;
+        }
+        .admin-table tbody tr:hover { background:rgba(255,255,255,.025); }
+        @media (max-width: 640px) {
+            .admin-stat { padding:14px; }
+            .demo-qr { width:135px; height:135px; }
+        }
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-brand-gold selection:text-black">
@@ -262,6 +313,12 @@
                         <span id="wishlist-badge" class="absolute -top-1 -right-1 bg-amber-500 text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
                     </button>
 
+                    <!-- Admin Panel Trigger -->
+                    <button onclick="openAdminLogin()" class="hidden md:inline-flex items-center gap-2 px-3 py-2.5 rounded-full bg-white/5 hover:bg-brand-gold/10 border border-brand-gold/20 text-amber-300 hover:text-white text-xs font-bold transition-all" title="Open Admin Panel">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span class="hidden xl:inline">Admin</span>
+                    </button>
+
                     <!-- Cart Drawer Trigger -->
                     <button onclick="toggleCartDrawer()" class="gold-btn px-4 py-2.5 rounded-full flex items-center gap-2.5 text-sm shadow-md">
                         <i class="fa-solid fa-bag-shopping text-base"></i>
@@ -283,6 +340,9 @@
             <a href="#catalog" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">🛍️ All Products Catalog</a>
             <a href="#wall-inspiration" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">🖼️ Wall Gallery Inspiration</a>
             <a href="#reviews" class="block py-2 text-gray-200 hover:text-brand-gold text-sm font-medium border-b border-white/5">⭐ Verified Customer Reviews</a>
+            <button onclick="openAdminLogin(); document.getElementById('mobile-menu').classList.add('hidden')" class="w-full text-left py-2 text-amber-300 text-sm font-medium flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved"></i> Admin Panel
+            </button>
             <button onclick="openTrackingModal()" class="w-full text-left py-2 text-brand-gold text-sm font-medium flex items-center gap-2">
                 <i class="fa-solid fa-truck"></i> Track Existing Order
             </button>
@@ -1040,23 +1100,23 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                         <div>
                             <label class="block text-gray-300 mb-1">Full Name *</label>
-                            <input type="text" required placeholder="John Doe" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                            <input type="text" id="checkout-name" name="customerName" required placeholder="John Doe" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
                         </div>
                         <div>
                             <label class="block text-gray-300 mb-1">Mobile Number (For WhatsApp Updates) *</label>
-                            <input type="tel" required placeholder="+91 9876543210" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                            <input type="tel" id="checkout-phone" name="customerPhone" required placeholder="+91 9876543210" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-gray-300 mb-1">Shipping Address *</label>
-                            <input type="text" required placeholder="Flat, Building, Street Area" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                            <input type="text" id="checkout-address" name="address" required placeholder="Flat, Building, Street Area" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
                         </div>
                         <div>
                             <label class="block text-gray-300 mb-1">City / Town *</label>
-                            <input type="text" required placeholder="e.g. Mumbai" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                            <input type="text" id="checkout-city" name="city" required placeholder="e.g. Mumbai" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
                         </div>
                         <div>
                             <label class="block text-gray-300 mb-1">Pincode *</label>
-                            <input type="text" required placeholder="400001" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
+                            <input type="text" id="checkout-pincode" name="pincode" required placeholder="400001" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-white focus:border-brand-gold">
                         </div>
                     </div>
                 </div>
@@ -1089,6 +1149,7 @@
                             </div>
                         </label>
                     </div>
+                    <p class="text-[10px] text-gray-500 mt-2"><i class="fa-solid fa-flask text-brand-gold mr-1"></i> Demo mode: clicking “Pay & Place Order” opens a simulated payment gateway. No real payment is processed.</p>
                 </div>
 
                 <!-- Order Final Button -->
@@ -1120,6 +1181,252 @@
                 <button onclick="closeSuccessModalAndTrack()" class="gold-btn w-full py-3 rounded-xl text-xs font-bold">
                     Track Order Live
                 </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Demo Payment Gateway -->
+    <div id="payment-gateway-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[70] hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl border border-brand-gold/30 my-6 overflow-hidden">
+            <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[.2em] text-brand-gold font-bold">Demo Payment Gateway</p>
+                    <h3 class="text-xl font-serif font-bold text-white mt-1">HsCraft Pay</h3>
+                    <p class="text-[11px] text-gray-400 mt-1">Simulation only — no real money is charged.</p>
+                </div>
+                <button onclick="closePaymentGateway()" class="text-gray-400 hover:text-white text-xl p-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-6 space-y-5">
+                <div class="flex items-center justify-between rounded-xl bg-brand-dark/70 border border-white/10 p-4">
+                    <div>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wider">Payable Amount</p>
+                        <p id="gateway-amount" class="text-2xl font-bold text-brand-gold">₹ 0</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wider">Order Type</p>
+                        <p id="gateway-order-type" class="text-xs font-bold text-white">Custom HsCraft Order</p>
+                    </div>
+                </div>
+
+                <div id="gateway-method-panel">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="switchGatewayMethod('upi')" id="gateway-upi-btn" class="gateway-option active glass-card p-3 rounded-xl text-left">
+                            <i class="fa-solid fa-qrcode text-brand-gold"></i>
+                            <p class="text-xs font-bold text-white mt-2">UPI</p>
+                            <p class="text-[10px] text-gray-500">Scan / simulate</p>
+                        </button>
+                        <button type="button" onclick="switchGatewayMethod('card')" id="gateway-card-btn" class="gateway-option glass-card p-3 rounded-xl text-left">
+                            <i class="fa-solid fa-credit-card text-brand-gold"></i>
+                            <p class="text-xs font-bold text-white mt-2">Card</p>
+                            <p class="text-[10px] text-gray-500">Test card</p>
+                        </button>
+                        <button type="button" onclick="switchGatewayMethod('cod')" id="gateway-cod-btn" class="gateway-option glass-card p-3 rounded-xl text-left">
+                            <i class="fa-solid fa-truck-fast text-brand-gold"></i>
+                            <p class="text-xs font-bold text-white mt-2">COD</p>
+                            <p class="text-[10px] text-gray-500">No payment now</p>
+                        </button>
+                    </div>
+
+                    <div id="gateway-upi-panel" class="mt-4 grid sm:grid-cols-[180px_1fr] gap-5 items-center rounded-2xl bg-white/[.03] border border-white/10 p-4">
+                        <div class="flex justify-center">
+                            <div id="demo-qr-holder" class="demo-qr flex items-center justify-center"></div>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-sm font-bold text-white">Scan the demo QR</p>
+                            <p class="text-xs text-gray-400 leading-relaxed">This QR is generated locally for the demo. Use the button below to simulate a successful UPI payment.</p>
+                            <div class="text-[11px] rounded-lg bg-brand-card p-3 border border-white/10">
+                                <div class="flex justify-between"><span class="text-gray-500">UPI ID</span><span class="text-white font-semibold">demo@hscraft</span></div>
+                                <div class="flex justify-between mt-1"><span class="text-gray-500">Reference</span><span id="gateway-upi-ref" class="text-amber-300 font-semibold">HSC-DEMO</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="gateway-card-panel" class="hidden mt-4 rounded-2xl bg-white/[.03] border border-white/10 p-4 space-y-3">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1">Demo Card Number</label>
+                            <input id="demo-card-number" value="4111 1111 1111 1111" inputmode="numeric" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-sm text-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1">Expiry</label>
+                                <input id="demo-card-expiry" value="12/30" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1">CVV</label>
+                                <input id="demo-card-cvv" value="123" type="password" maxlength="3" class="w-full bg-brand-card border border-white/15 rounded-lg p-2.5 text-sm text-white">
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-gray-500"><i class="fa-solid fa-circle-info text-brand-gold mr-1"></i> These values are fake test data and are not sent anywhere.</p>
+                    </div>
+
+                    <div id="gateway-cod-panel" class="hidden mt-4 rounded-2xl bg-white/[.03] border border-white/10 p-5 text-center">
+                        <div class="w-12 h-12 rounded-full bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold mx-auto">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        <p class="text-sm font-bold text-white mt-3">Cash on Delivery selected</p>
+                        <p class="text-xs text-gray-400 mt-1">No online payment is simulated. The order will be stored as <strong class="text-amber-300">COD / Pending</strong>.</p>
+                    </div>
+                </div>
+
+                <div id="gateway-progress" class="hidden rounded-xl bg-brand-dark border border-brand-gold/20 p-4 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full border-2 border-brand-gold border-t-transparent animate-spin"></div>
+                    <p class="text-sm font-bold text-white mt-3">Processing demo payment…</p>
+                    <p class="text-[10px] text-gray-500 mt-1">Creating your HsCraft order record locally.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="closePaymentGateway()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-bold">
+                        Cancel
+                    </button>
+                    <button onclick="completeDemoPayment()" class="w-full gold-btn px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock"></i>
+                        <span id="gateway-action-text">Simulate UPI Payment</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[80] hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-sm rounded-2xl p-6 border border-brand-gold/30 relative">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold text-xl">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-xl font-serif font-bold text-white mt-4">HsCraft Admin</h3>
+                <p class="text-[11px] text-gray-400 mt-1">Demo dashboard access</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4 mt-6">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1">Demo Password</label>
+                    <input id="admin-password" type="password" value="admin123" class="w-full bg-brand-card border border-white/15 rounded-xl p-3 text-sm text-white focus:border-brand-gold focus:outline-none">
+                </div>
+                <div id="admin-login-error" class="hidden text-[11px] text-rose-400"></div>
+                <button class="w-full gold-btn py-3 rounded-xl text-xs font-bold">
+                    Enter Dashboard
+                </button>
+                <p class="text-center text-[10px] text-gray-600">Demo password: <span class="text-gray-400">admin123</span></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-panel-modal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[85] hidden overflow-y-auto">
+        <div class="min-h-full admin-shell">
+            <div class="sticky top-0 z-10 border-b border-white/10 glass-panel">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-gold to-amber-200 flex items-center justify-center text-brand-dark font-luxury font-bold">Hs</div>
+                        <div>
+                            <p class="font-luxury font-bold text-white tracking-wider">Hs<span class="gold-gradient-text">Craft</span> Admin</p>
+                            <p class="text-[10px] text-gray-500">Local demo operations dashboard</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="seedDemoOrder()" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-[10px] font-bold text-white">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brand-gold mr-1"></i> Seed Demo
+                        </button>
+                        <button onclick="logoutAdmin()" class="px-3 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-[10px] font-bold text-rose-300">
+                            Logout
+                        </button>
+                        <button onclick="closeAdminPanel()" class="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/15 text-gray-300">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-7">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="admin-stat">
+                        <p class="text-[10px] uppercase tracking-widest text-gray-500">Orders</p>
+                        <p id="admin-stat-orders" class="text-2xl font-bold text-white mt-2">0</p>
+                    </div>
+                    <div class="admin-stat">
+                        <p class="text-[10px] uppercase tracking-widest text-gray-500">Revenue</p>
+                        <p id="admin-stat-revenue" class="text-2xl font-bold text-brand-gold mt-2">₹ 0</p>
+                    </div>
+                    <div class="admin-stat">
+                        <p class="text-[10px] uppercase tracking-widest text-gray-500">Pending</p>
+                        <p id="admin-stat-pending" class="text-2xl font-bold text-amber-300 mt-2">0</p>
+                    </div>
+                    <div class="admin-stat">
+                        <p class="text-[10px] uppercase tracking-widest text-gray-500">Avg. Order</p>
+                        <p id="admin-stat-aov" class="text-2xl font-bold text-emerald-300 mt-2">₹ 0</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-4 sm:p-5">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Order Management</h3>
+                            <p class="text-[11px] text-gray-500">Orders are stored in this browser using localStorage.</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input id="admin-order-search" oninput="renderAdminOrders()" placeholder="Search order, name, phone…" class="bg-brand-card border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold">
+                            <button onclick="exportOrdersJSON()" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-[10px] font-bold text-white">
+                                <i class="fa-solid fa-file-export text-brand-gold mr-1"></i> Export JSON
+                            </button>
+                            <button onclick="clearAllOrders()" class="px-3 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-[10px] font-bold text-rose-300">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Customer</th>
+                                    <th>Items</th>
+                                    <th>Payment</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-orders-body"></tbody>
+                        </table>
+                    </div>
+                    <div id="admin-empty-state" class="hidden text-center py-12">
+                        <i class="fa-solid fa-inbox text-4xl text-gray-700"></i>
+                        <p class="text-sm font-bold text-white mt-3">No orders yet</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Place a demo order from the storefront, or use “Seed Demo”.</p>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-5">
+                    <div class="glass-panel rounded-2xl p-5">
+                        <h3 class="text-sm font-bold text-white">Quick Actions</h3>
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <button onclick="window.scrollTo(0,0); closeAdminPanel()" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 text-left">
+                                <i class="fa-solid fa-store text-brand-gold"></i>
+                                <p class="text-xs font-bold text-white mt-2">View Storefront</p>
+                                <p class="text-[10px] text-gray-500">Return to shopping site</p>
+                            </button>
+                            <button onclick="seedDemoOrder()" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 text-left">
+                                <i class="fa-solid fa-plus text-brand-gold"></i>
+                                <p class="text-xs font-bold text-white mt-2">Add Test Order</p>
+                                <p class="text-[10px] text-gray-500">Creates sample data</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-5">
+                        <h3 class="text-sm font-bold text-white">Demo Notes</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mt-3">
+                            This dashboard is intentionally front-end only. For a real store, move authentication, orders, customer data, payment verification, and inventory into a server/database and use a real payment provider.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1191,10 +1498,13 @@
             <!-- Bottom Copyright & Security Badges -->
             <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
                 <p>© 2026 HsCraft India. Inspired by omgs.in, Built with enhanced 3D Studio Features.</p>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 flex-wrap justify-center">
                     <span><i class="fa-solid fa-lock text-emerald-400 mr-1"></i> SSL 256-Bit Encrypted Checkout</span>
-                    <span>•</span>
+                    <span class="hidden sm:inline">•</span>
                     <span>100% Damage Replacement Guarantee</span>
+                    <button onclick="openAdminLogin()" class="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-brand-gold/25 bg-brand-gold/5 px-3 py-1.5 text-[10px] font-bold text-amber-300 hover:bg-brand-gold/15 hover:text-white transition-all" title="Open Admin Panel">
+                        <i class="fa-solid fa-shield-halved"></i> Admin
+                    </button>
                 </div>
             </div>
 
@@ -1208,6 +1518,14 @@
             cart: [],
             wishlist: [],
             coupon: { code: '', discountPercent: 0 },
+            payment: {
+                selectedMethod: 'upi',
+                pendingCheckout: null,
+                orderDraft: null
+            },
+            admin: {
+                loggedIn: false
+            },
             studio: {
                 photoSrc: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80',
                 productType: 'frame',
@@ -1311,6 +1629,23 @@
             renderCatalogGrid(catalogProducts);
             setupSearchListeners();
             recalculateStudioPrice();
+            updateCheckoutAmount();
+
+            document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    state.payment.selectedMethod = radio.value;
+                    document.querySelectorAll('input[name="payment-method"]').forEach(r => {
+                        r.closest('label')?.classList.toggle('border-brand-gold', radio.checked);
+                    });
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+                    e.preventDefault();
+                    openAdminLogin();
+                }
+            });
         });
 
         /* Studio Customizer Functions */
@@ -1608,16 +1943,64 @@
         function performOrderTrack() {
             const id = document.getElementById('tracking-input').value.trim() || 'HSC-9842';
             document.getElementById('track-id-disp').innerText = id;
-            showToast(`Tracking status updated for ${id}`);
+
+            const order = getOrders().find(o => String(o.id).toUpperCase() === id.toUpperCase());
+            const result = document.getElementById('tracking-result-box');
+
+            if (!order) {
+                result.querySelector('.bg-amber-500\\/20').innerText = 'DEMO TRACKING';
+                showToast(`No saved demo order found for ${id}.`);
+                return;
+            }
+
+            const badge = result.querySelector('.bg-amber-500\\/20');
+            badge.innerText = String(order.status || 'ORDER CONFIRMED').toUpperCase();
+
+            const steps = result.querySelectorAll('.space-y-4.text-xs.relative.pl-6 > .relative');
+            const stage = {
+                'Order Confirmed': 0,
+                'Payment Pending': 0,
+                'Processing': 1,
+                'Shipped': 2,
+                'Delivered': 3,
+                'Cancelled': -1
+            }[order.status] ?? 0;
+
+            steps.forEach((step, index) => {
+                step.classList.remove('opacity-50');
+                const dot = step.querySelector('span');
+                if (order.status === 'Cancelled') {
+                    if (index > 0) step.classList.add('opacity-50');
+                    dot?.classList.remove('bg-brand-gold');
+                    dot?.classList.add(index === 0 ? 'bg-rose-400' : 'bg-gray-600');
+                    return;
+                }
+                if (index <= stage) {
+                    dot?.classList.remove('bg-gray-600');
+                    dot?.classList.add('bg-brand-gold');
+                } else {
+                    step.classList.add('opacity-50');
+                    dot?.classList.remove('bg-brand-gold');
+                    dot?.classList.add('bg-gray-600');
+                }
+            });
+
+            const currentNode = steps[Math.max(0, Math.min(stage, steps.length - 1))];
+            const currentText = currentNode?.querySelector('p');
+            if (currentText) currentText.classList.add('text-brand-gold');
+
+            showToast(`Tracking status loaded for ${id}.`);
         }
 
-        /* Checkout Modal */
+        /* Checkout Modal + Demo Payment Gateway */
         function openCheckoutModal() {
             if (state.cart.length === 0) {
                 showToast('Your bag is empty! Add items before checkout.');
                 return;
             }
             toggleCartDrawer();
+            updateCheckoutAmount();
+            syncGatewayMethodFromCheckout();
             document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
@@ -1625,22 +2008,402 @@
             document.getElementById('checkout-modal').classList.add('hidden');
         }
 
+        function updateCheckoutAmount() {
+            const subtotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const discount = (subtotal * state.coupon.discountPercent) / 100;
+            const total = Math.max(0, subtotal - discount);
+            document.getElementById('checkout-final-amount').innerText = `₹ ${total.toLocaleString()}`;
+            return { subtotal, discount, total };
+        }
+
+        function syncGatewayMethodFromCheckout() {
+            const checked = document.querySelector('input[name="payment-method"]:checked');
+            state.payment.selectedMethod = checked ? checked.value : 'upi';
+        }
+
         function handlePlaceOrder(e) {
             e.preventDefault();
-            const randomOrderId = 'HSC-' + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('success-order-id').innerText = randomOrderId;
-            
+            const form = document.getElementById('checkout-form');
+            if (!form.reportValidity()) return;
+
+            const totals = updateCheckoutAmount();
+            const method = document.querySelector('input[name="payment-method"]:checked')?.value || 'upi';
+
+            state.payment.selectedMethod = method;
+            state.payment.orderDraft = {
+                customerName: document.getElementById('checkout-name').value.trim(),
+                customerPhone: document.getElementById('checkout-phone').value.trim(),
+                address: document.getElementById('checkout-address').value.trim(),
+                city: document.getElementById('checkout-city').value.trim(),
+                pincode: document.getElementById('checkout-pincode').value.trim(),
+                method,
+                items: state.cart.map(item => ({...item})),
+                subtotal: totals.subtotal,
+                discount: totals.discount,
+                total: totals.total,
+                createdAt: new Date().toISOString()
+            };
+
             closeCheckoutModal();
-            document.getElementById('order-success-modal').classList.remove('hidden');
-            
-            // Reset Cart
-            state.cart = [];
-            updateCartUI();
+            openPaymentGateway();
+        }
+
+        function openPaymentGateway() {
+            const draft = state.payment.orderDraft;
+            if (!draft) return;
+
+            document.getElementById('gateway-amount').innerText = `₹ ${draft.total.toLocaleString()}`;
+            document.getElementById('gateway-order-type').innerText =
+                `${draft.items.length} item${draft.items.length === 1 ? '' : 's'} • ${draft.city || 'India'}`;
+            const ref = 'HSC-' + Math.random().toString(36).slice(2, 7).toUpperCase();
+            document.getElementById('gateway-upi-ref').innerText = ref;
+
+            document.getElementById('payment-gateway-modal').classList.remove('hidden');
+            document.getElementById('gateway-progress').classList.add('hidden');
+            switchGatewayMethod(draft.method || 'upi');
+            renderDemoQR(ref, draft.total);
+        }
+
+        function closePaymentGateway() {
+            document.getElementById('payment-gateway-modal').classList.add('hidden');
+            state.payment.orderDraft = null;
+        }
+
+        function switchGatewayMethod(method) {
+            state.payment.selectedMethod = method;
+            ['upi', 'card', 'cod'].forEach(m => {
+                document.getElementById(`gateway-${m}-btn`)?.classList.toggle('active', m === method);
+                document.getElementById(`gateway-${m}-panel`)?.classList.toggle('hidden', m !== method);
+            });
+
+            const actionText = {
+                upi: 'Simulate UPI Payment',
+                card: 'Simulate Card Payment',
+                cod: 'Place COD Order'
+            }[method] || 'Continue';
+
+            document.getElementById('gateway-action-text').innerText = actionText;
+        }
+
+        function renderDemoQR(ref, amount) {
+            const size = 29;
+            const grid = Array.from({length: size}, () => Array(size).fill(0));
+            const mark = (x, y) => {
+                for (let yy = -1; yy <= 7; yy++) {
+                    for (let xx = -1; xx <= 7; xx++) {
+                        const ax = x + xx, ay = y + yy;
+                        if (ax < 0 || ay < 0 || ax >= size || ay >= size) continue;
+                        const edge = xx === -1 || xx === 7 || yy === -1 || yy === 7;
+                        const outer = xx >= 0 && xx <= 6 && yy >= 0 && yy <= 6 && (xx === 0 || xx === 6 || yy === 0 || yy === 6);
+                        const inner = xx >= 2 && xx <= 4 && yy >= 2 && yy <= 4;
+                        grid[ay][ax] = (!edge && (outer || inner)) ? 1 : 0;
+                    }
+                }
+            };
+            mark(1, 1); mark(size - 8, 1); mark(1, size - 8);
+
+            let seed = 0;
+            const payload = `${ref}|demo@hscraft|${amount}`;
+            for (const c of payload) seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    if (grid[y][x]) continue;
+                    seed = (1664525 * seed + 1013904223) >>> 0;
+                    if ((seed % 100) < 43) grid[y][x] = 1;
+                }
+            }
+
+            const cell = 5;
+            const pad = 5;
+            let rects = `<rect width="${size*cell + pad*2}" height="${size*cell + pad*2}" fill="#fff"/>`;
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    if (grid[y][x]) {
+                        rects += `<rect x="${pad+x*cell}" y="${pad+y*cell}" width="${cell}" height="${cell}" fill="#0B0F17"/>`;
+                    }
+                }
+            }
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="165" height="165" viewBox="0 0 ${size*cell+pad*2} ${size*cell+pad*2}">${rects}</svg>`;
+            document.getElementById('demo-qr-holder').innerHTML =
+                `<img src="data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}" alt="Demo UPI QR" class="w-full h-full rounded-lg">`;
+        }
+
+        function completeDemoPayment() {
+            const draft = state.payment.orderDraft;
+            if (!draft) return;
+
+            if (state.payment.selectedMethod === 'card') {
+                const card = document.getElementById('demo-card-number').value.replace(/\s/g, '');
+                const exp = document.getElementById('demo-card-expiry').value.trim();
+                const cvv = document.getElementById('demo-card-cvv').value.trim();
+                if (card.length < 12 || !exp || cvv.length !== 3) {
+                    showToast('Enter the demo card details first.');
+                    return;
+                }
+            }
+
+            const progress = document.getElementById('gateway-progress');
+            progress.classList.remove('hidden');
+
+            setTimeout(() => {
+                const paymentMethodLabel = {
+                    upi: 'UPI (Demo Paid)',
+                    card: 'Card (Demo Paid)',
+                    cod: 'Cash on Delivery'
+                }[state.payment.selectedMethod];
+
+                const orderId = 'HSC-' + Math.floor(1000 + Math.random() * 9000);
+                const order = {
+                    id: orderId,
+                    ...draft,
+                    paymentMethod: paymentMethodLabel,
+                    paymentStatus: state.payment.selectedMethod === 'cod' ? 'pending' : 'paid',
+                    status: state.payment.selectedMethod === 'cod' ? 'Payment Pending' : 'Order Confirmed',
+                    paidAt: state.payment.selectedMethod === 'cod' ? null : new Date().toISOString()
+                };
+
+                saveOrder(order);
+                document.getElementById('success-order-id').innerText = orderId;
+
+                progress.classList.add('hidden');
+                document.getElementById('payment-gateway-modal').classList.add('hidden');
+                document.getElementById('order-success-modal').classList.remove('hidden');
+
+                state.cart = [];
+                state.payment.orderDraft = null;
+                state.coupon = { code: '', discountPercent: 0 };
+                updateCartUI();
+
+                showToast(
+                    state.payment.selectedMethod === 'cod'
+                        ? 'COD order created in demo admin.'
+                        : 'Demo payment successful — order saved.'
+                );
+            }, 1200);
+        }
+
+        function saveOrder(order) {
+            const orders = getOrders();
+            orders.unshift(order);
+            localStorage.setItem('hscraftOrders', JSON.stringify(orders));
+        }
+
+        function getOrders() {
+            try {
+                const parsed = JSON.parse(localStorage.getItem('hscraftOrders') || '[]');
+                return Array.isArray(parsed) ? parsed : [];
+            } catch {
+                return [];
+            }
         }
 
         function closeSuccessModalAndTrack() {
             document.getElementById('order-success-modal').classList.add('hidden');
+            const id = document.getElementById('success-order-id').innerText;
+            document.getElementById('tracking-input').value = id;
             openTrackingModal();
+            performOrderTrack();
+        }
+
+        /* Admin Dashboard */
+        function openAdminLogin() {
+            document.getElementById('admin-login-error').classList.add('hidden');
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('admin-password')?.focus(), 50);
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            if (password !== 'admin123') {
+                const el = document.getElementById('admin-login-error');
+                el.innerText = 'Incorrect demo password.';
+                el.classList.remove('hidden');
+                return;
+            }
+            state.admin.loggedIn = true;
+            closeAdminLogin();
+            openAdminPanel();
+        }
+
+        function openAdminPanel() {
+            if (!state.admin.loggedIn) {
+                openAdminLogin();
+                return;
+            }
+            document.getElementById('admin-panel-modal').classList.remove('hidden');
+            renderAdminDashboard();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-panel-modal').classList.add('hidden');
+        }
+
+        function logoutAdmin() {
+            state.admin.loggedIn = false;
+            closeAdminPanel();
+            showToast('Logged out of demo admin.');
+        }
+
+        function getStatusClass(status) {
+            const s = String(status || '').toLowerCase();
+            if (s.includes('cancel')) return 'status-cancelled';
+            if (s.includes('deliver')) return 'status-delivered';
+            if (s.includes('ship')) return 'status-shipped';
+            if (s.includes('process') || s.includes('confirmed')) return 'status-processing';
+            if (s.includes('paid')) return 'status-paid';
+            return 'status-pending';
+        }
+
+        function renderAdminDashboard() {
+            const orders = getOrders();
+            const revenue = orders
+                .filter(o => o.paymentStatus === 'paid')
+                .reduce((sum, o) => sum + Number(o.total || 0), 0);
+            const pending = orders.filter(o => !['Delivered', 'Cancelled'].includes(o.status)).length;
+            const aov = orders.length ? Math.round(orders.reduce((sum,o)=>sum+Number(o.total||0),0)/orders.length) : 0;
+
+            document.getElementById('admin-stat-orders').innerText = orders.length;
+            document.getElementById('admin-stat-revenue').innerText = `₹ ${revenue.toLocaleString()}`;
+            document.getElementById('admin-stat-pending').innerText = pending;
+            document.getElementById('admin-stat-aov').innerText = `₹ ${aov.toLocaleString()}`;
+            renderAdminOrders();
+        }
+
+        function renderAdminOrders() {
+            const orders = getOrders();
+            const search = (document.getElementById('admin-order-search')?.value || '').toLowerCase().trim();
+            const filtered = orders.filter(o => {
+                if (!search) return true;
+                return [o.id, o.customerName, o.customerPhone, o.city, o.paymentMethod, o.status]
+                    .some(v => String(v || '').toLowerCase().includes(search));
+            });
+
+            const tbody = document.getElementById('admin-orders-body');
+            const empty = document.getElementById('admin-empty-state');
+            tbody.innerHTML = filtered.map(o => {
+                const itemCount = (o.items || []).reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+                const safeStatus = String(o.status || 'Pending').replace(/"/g, '&quot;');
+                return `
+                    <tr>
+                        <td>
+                            <div class="font-bold text-brand-gold">${o.id}</div>
+                            <div class="text-[10px] text-gray-600">${o.pincode || ''}</div>
+                        </td>
+                        <td>
+                            <div class="font-semibold text-white">${escapeHtml(o.customerName || '—')}</div>
+                            <div class="text-[10px] text-gray-500">${escapeHtml(o.customerPhone || '')}</div>
+                        </td>
+                        <td>
+                            <div class="text-white font-semibold">${itemCount}</div>
+                            <div class="text-[10px] text-gray-500">${escapeHtml((o.items || []).map(i=>i.title).join(', ').slice(0,55))}</div>
+                        </td>
+                        <td>
+                            <span class="text-[10px] font-semibold text-gray-300">${escapeHtml(o.paymentMethod || '')}</span>
+                            <div class="text-[10px] ${o.paymentStatus==='paid'?'text-emerald-400':'text-amber-400'}">${o.paymentStatus === 'paid' ? 'PAID' : 'PENDING'}</div>
+                        </td>
+                        <td class="font-bold text-white">₹ ${Number(o.total || 0).toLocaleString()}</td>
+                        <td>
+                            <select onchange="updateOrderStatus('${o.id}', this.value)" class="bg-brand-card border border-white/10 rounded-lg px-2 py-1.5 text-[10px] text-white">
+                                ${['Order Confirmed','Payment Pending','Processing','Shipped','Delivered','Cancelled'].map(s => `<option value="${s}" ${s===o.status?'selected':''}>${s}</option>`).join('')}
+                            </select>
+                            <div class="mt-1"><span class="status-pill ${getStatusClass(o.status)}">${safeStatus}</span></div>
+                        </td>
+                        <td class="text-[10px] text-gray-500">${formatAdminDate(o.createdAt)}</td>
+                        <td>
+                            <button onclick="deleteOrder('${o.id}')" class="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            empty.classList.toggle('hidden', filtered.length !== 0);
+        }
+
+        function updateOrderStatus(id, status) {
+            const orders = getOrders();
+            const order = orders.find(o => o.id === id);
+            if (!order) return;
+            order.status = status;
+            if (status === 'Cancelled') order.paymentStatus = 'refunded-demo';
+            localStorage.setItem('hscraftOrders', JSON.stringify(orders));
+            renderAdminDashboard();
+            showToast(`${id} status changed to ${status}.`);
+        }
+
+        function deleteOrder(id) {
+            const orders = getOrders().filter(o => o.id !== id);
+            localStorage.setItem('hscraftOrders', JSON.stringify(orders));
+            renderAdminDashboard();
+            showToast('Order removed from demo dashboard.');
+        }
+
+        function clearAllOrders() {
+            localStorage.removeItem('hscraftOrders');
+            renderAdminDashboard();
+            showToast('Demo order list cleared.');
+        }
+
+        function seedDemoOrder() {
+            const seed = Math.floor(1000 + Math.random() * 9000);
+            saveOrder({
+                id: 'HSC-DEMO' + seed,
+                customerName: 'Demo Customer',
+                customerPhone: '+91 90000 00000',
+                address: '12 Demo Street',
+                city: 'Jaipur',
+                pincode: '302001',
+                method: 'upi',
+                paymentMethod: 'UPI (Demo Paid)',
+                paymentStatus: 'paid',
+                status: 'Processing',
+                items: [{
+                    id: 'demo-1',
+                    title: 'Ultra-Gloss Acrylic Wall Frame',
+                    price: 1499,
+                    quantity: 1,
+                    image: catalogProducts[0].image,
+                    details: 'Demo order • 18" x 12"'
+                }],
+                subtotal: 1499,
+                discount: 0,
+                total: 1499,
+                createdAt: new Date().toISOString(),
+                paidAt: new Date().toISOString()
+            });
+            renderAdminDashboard();
+            showToast('Demo order added.');
+        }
+
+        function exportOrdersJSON() {
+            const data = JSON.stringify(getOrders(), null, 2);
+            const blob = new Blob([data], {type:'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hscraft-orders-demo.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function formatAdminDate(iso) {
+            try {
+                return new Date(iso).toLocaleString('en-IN', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+            } catch {
+                return '—';
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, c => ({
+                '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+            }[c]));
         }
 
         /* Wishlist Toggle */
